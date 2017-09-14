@@ -16,18 +16,23 @@ public class Fugir extends AlgoritmoMovimentacao {
 
     public Fugir(float maxVelocidade) {
         super(NOME);
+        this.maxVelocidade = maxVelocidade;
     }
 
     @Override
     public Direcionamento guiar(Pose agente) {
         Direcionamento output = new Direcionamento();
-
-        // calcula que direção tomar (configura um objeto Direcionamento 
-        // e o retorna)
-        // ...
-        // super.alvo já contém a posição do alvo
-        // agente (parâmetro) é a pose do agente que estamos guiando
-        // ...
+        
+        output.velocidade = agente.posicao.cpy().sub(alvo.getObjetivo().cpy());
+        
+        output.velocidade.nor();
+        output.velocidade.x *= maxVelocidade;
+        output.velocidade.y *= maxVelocidade;
+        
+        agente.olharNaDirecaoDaVelocidade(output.velocidade);
+        
+        output.rotacao = 0;
+        
         return output;
     }
 
