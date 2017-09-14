@@ -27,7 +27,7 @@ public class Buscar extends AlgoritmoMovimentacao {
     public Direcionamento guiar(Pose agente) {
         Direcionamento output = new Direcionamento();
         
-        output.velocidade = alvo.getObjetivo().sub(agente.posicao);
+        output.velocidade = alvo.getObjetivo().cpy().sub(agente.posicao.cpy());
         
         output.velocidade.nor();
         output.velocidade.x *= maxVelocidade;
